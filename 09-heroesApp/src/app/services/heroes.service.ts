@@ -25,10 +25,20 @@ export class HeroesService {
 
   actualizarHeroe( heroe: HeroeModel){
 
-    const { id, ...heroeTemp } = heroe;
+   const heroeTemp = {
+    id: heroe.id,
+    nombre: heroe.nombre,
+    poder: heroe.poder,
+    vivo: heroe.vivo
+   };
 
 
     return this.http.put(`${ this.url}/heroes/${heroe.id}.json`, heroeTemp);
+
+  }
+
+  borrarHeroe( id: string){
+    return this.http.delete(`${ this.url }/heroes/${ id }.json`);
 
   }
 

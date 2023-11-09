@@ -53,6 +53,7 @@ export class HeroeComponent implements OnInit {
 
     if (this.heroe.id) {
       peticion = this.heroesService.actualizarHeroe(this.heroe);
+      console.log(this.heroe.id);
     } else {
       peticion = this.heroesService.crearHeroe(this.heroe);
     }

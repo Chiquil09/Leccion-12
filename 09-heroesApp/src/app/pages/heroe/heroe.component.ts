@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HereoModel } from 'src/app/models/heroe.model';
+import { HeroeModel } from 'src/app/models/heroe.model';
 import { NgForm } from '@angular/forms';
 import { HeroesService } from 'src/app/services/heroes.service';
 
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class HeroeComponent implements OnInit {
 
-  heroe = new HereoModel();
+  heroe = new HeroeModel();
 
   constructor(private heroesService: HeroesService) { }
 

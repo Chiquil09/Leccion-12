@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HereoModel } from '../models/heroe.model';
+import { HeroeModel } from '../models/heroe.model';
 import { map } from 'rxjs';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class HeroesService {
 
   constructor( private http: HttpClient ) { }
 
-  crearHeroe ( heroe: HereoModel){
+  crearHeroe ( heroe: HeroeModel){
 
     return this.http.post(`${ this.url }/heroes.json`, heroe)
     .pipe(
@@ -23,7 +23,7 @@ export class HeroesService {
     );
   }
 
-  actualizarHeroe( heroe: HereoModel){
+  actualizarHeroe( heroe: HeroeModel){
 
     const { id, ...heroeTemp } = heroe;
 
@@ -31,6 +31,31 @@ export class HeroesService {
     return this.http.put(`${ this.url}/heroes/${heroe.id}.json`, heroeTemp);
 
   }
+
+  getHeroes(){
+    return this.http.get(`${ this.url }/heroes.json`)
+    .pipe(
+      map( this.crearArreglo)
+    );
+
+  }
+
+  private crearArreglo(heroesObj: { [key: string]: HeroeModel } | any): HeroeModel[] {
+
+    const heroes: HeroeModel[]= [];
+
+    if (heroesObj === null ){return [];}
+
+    Object.keys (heroesObj).forEach( key =>{
+      const heroe: HeroeModel = heroesObj[key];
+      heroe.id = key;
+
+      heroes.push(heroe);
+    })
+
+
+    return heroes;
+}
 
 
 }
